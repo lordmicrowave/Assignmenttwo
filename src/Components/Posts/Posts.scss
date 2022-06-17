@@ -1,0 +1,18 @@
+.app__posts {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+}
+
+.Card {
+  display: flex;
+}
+
+button {
+  background: none;
+  color: var(--gray);
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  border: none;
+}
