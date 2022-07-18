@@ -1,25 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.scss";
+import { Navbar } from "./Components";
+import {
+  Explore,
+  Home,
+  Login,
+  Register,
+  Direct,
+  Notfound,
+  Profile,
+  
 
-function App() {
+} from "./Pages";
+import { Routes, Route, useLocation } from "react-router-dom";
+
+//import { OverlayTrigger, Overlay, Tooltip, Button } from 'react-bootstrap';
+//import 'bootstrap/dist/css/bootstrap.min.css';
+
+const App = () => {
+  const location = useLocation();
+  const pathname = location.pathname.slice(1);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      {pathname === "login" || pathname === "register" ? null : <Navbar />}
+      <div
+        className="app__wrapper"
+        style={{
+          minHeight:
+            pathname === "login" || pathname === "register" ? "100vh" : "90vh",
+        }}
+      >
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="explore" element={<Explore />}>
+            <Route path=":id" element={<Explore />} />
+          </Route>
+          <Route path="direct" element={<Direct />} />
+          <Route path="profile/:username" element={<Profile />} />
+          <Route path="*" element={<Notfound />} />
+        </Routes>
+      </div>
     </div>
+
+    
   );
-}
+};
 
 export default App;
